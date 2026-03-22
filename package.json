@@ -1,8 +1,0 @@
-{
-  "name": "hamibrithday",
-  "version": "1.0.0",
-  "description": "Birthday website",
-  "scripts": {
-    "build": "echo 'No build needed'"
-  }
-}
