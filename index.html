@@ -561,3 +561,91 @@
                 // Animate confetti falling
                 const animation = confetti.animate([
                     { 
+                        top: '-20px', 
+                        opacity: 1, 
+                        transform: `translateX(0) rotate(0deg)` 
+                    },
+                    { 
+                        top: Math.random() * 100 + 50 + 'vh', 
+                        opacity: 0.7,
+                        transform: `translateX(${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg)` 
+                    }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                });
+                
+                // Remove confetti after animation
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Create heart animation
+        function createHeartAnimation() {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.position = 'fixed';
+                heart.style.color = '#FF6B8B';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.opacity = '0.8';
+                heart.style.zIndex = '1000';
+                heart.style.pointerEvents = 'none';
+                
+                document.body.appendChild(heart);
+                
+                // Animate heart floating up
+                heart.animate([
+                    { top: '100vh', opacity: 0.8, transform: 'scale(1)' },
+                    { top: Math.random() * 50 + 'vh', opacity: 0.5, transform: 'scale(1.2)' },
+                    { top: '-50px', opacity: 0, transform: 'scale(0.5)' }
+                ], {
+                    duration: Math.random() * 2000 + 1000,
+                    easing: 'ease-out'
+                });
+                
+                // Remove heart after animation
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        // Create confetti effect for custom wish submission
+        function createConfettiEffect() {
+            createCelebrationEffect();
+        }
+
+        // Play celebration sound (using Web Audio API)
+        function playCelebrationSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                // Audio context not supported, silently fail
+                console.log("Audio not supported in this browser");
+            }
+        }
+
+        // Initialize
+        setInterval(changeBirthdayName, 8000);
+        
+        // Add initial sparkle effect
+        setTimeout(() => createSparkleEffect(), 1000);
+    </script>
+</body>
+</html>
