@@ -1,3 +1,0 @@
-git add index.html
-git commit -m "index.html"
-git push origin main
